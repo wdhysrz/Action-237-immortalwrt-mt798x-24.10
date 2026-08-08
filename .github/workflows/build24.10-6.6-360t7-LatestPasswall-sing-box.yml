@@ -81,16 +81,13 @@ jobs:
         # 移除 openwrt feeds 自带的核心库
         rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,v2ray-plugin,xray-plugin,geoview,shadow-tls}
         git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
-
-        # 移除 openwrt feeds 过时的luci版本
+        rm -rf package/passwall-packages/{xray-core,xray-plugin,v2ray-plugin,v2ray-geodata,hysteria,naiveproxy,shadowsocks-rust,shadowsocksr-libev,trojan-plus,tuic-client,sing-box}
         rm -rf feeds/luci/applications/luci-app-passwall
         git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-luci
-        rm -rf feeds/packages/net/sing-box
-        rm -rf package/sing-box
         git clone --depth=1 https://github.com/VIKINGYFY/packages temp_viking
         cp -r temp_viking/sing-box package/
         rm -rf temp_viking
-                 
+           
     - name: Load custom configuration
       run: |
         # [ -e files ] && mv files openwrt/files
