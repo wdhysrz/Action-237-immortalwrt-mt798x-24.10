@@ -10,9 +10,12 @@
 # See /LICENSE for more information.
 #
 
-# diy-part2.sh 添加
-sed -i '/CONFIG_PACKAGE_lutil=y/d' .config
+# 查找依赖
+grep -r "DEPENDS.*+lutil" feeds/
+# 删除旧行，写入禁用，避免重复
+sed -i '/CONFIG_PACKAGE_lutil/d' .config
 echo "# CONFIG_PACKAGE_lutil is not set" >> .config
+
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generate
