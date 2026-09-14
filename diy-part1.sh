@@ -18,9 +18,10 @@
 # echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 # echo 'src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
 
-# 【新增】删除冲突的mtwifi-cfg，解决lutil文件覆盖报错
- rm -rf feeds/*/mtwifi-cfg
- # 更新 & 安装 feeds
- ./scripts/feeds update -a
- ./scripts/feeds install -a
-
+# 删除冲突包源码
+rm -rf feeds/*/mtwifi-cfg
+# 直接在包配置里标记不编译 mtwifi-cfg
+sed -i '/mtwifi-cfg/d' feeds/mtwifi/package/*/Makefile
+# 更新&安装feeds
+./scripts/feeds update -a
+./scripts/feeds install -a
