@@ -17,3 +17,10 @@
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 # echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 # echo 'src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
+
+# 【新增】删除冲突的mtwifi-cfg，解决lutil文件覆盖报错
+ rm -rf feeds/*/mtwifi-cfg
+ # 更新 & 安装 feeds
+ ./scripts/feeds update -a
+ ./scripts/feeds install -a
+
