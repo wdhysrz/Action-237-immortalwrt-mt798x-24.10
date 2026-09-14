@@ -10,11 +10,14 @@
 # See /LICENSE for more information.
 #
 
-# 查找依赖
-grep -r "DEPENDS.*+lutil" feeds/
-# 删除旧行，写入禁用，避免重复
-sed -i '/CONFIG_PACKAGE_lutil/d' .config
-echo "# CONFIG_PACKAGE_lutil is not set" >> .config
+cd openwrt
+MTWIFI_MAKEFILE=$(find . -name "Makefile" | grep -i "mtwifi-cfg" | head -n 1)
+if [ -n "$MTWIFI_MAKEFILE" ]; then
+  if ! grep -q "extra_provides" "$MTWIFI_MAKEFILE"; then
+    echo "Package/mtwifi-cfg/extra_provides := liutil" >> "$MTWIFI_MAKEFILE"
+    echo "Package/mtwifi-cfg/override := 1" >> "$MTWIFI_MAKEFILE"
+  fi
+fi
 
 
 # Modify default IP
