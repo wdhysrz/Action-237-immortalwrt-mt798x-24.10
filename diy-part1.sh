@@ -18,10 +18,3 @@
 # echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 # echo 'src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages' >>feeds.conf.default
 
-# 删除冲突包源码
-rm -rf feeds/*/mtwifi-cfg
-# 直接在包配置里标记不编译 mtwifi-cfg
-sed -i '/mtwifi-cfg/d' feeds/mtwifi/package/*/Makefile
-# 更新&安装feeds
-./scripts/feeds update -a
-./scripts/feeds install -a
